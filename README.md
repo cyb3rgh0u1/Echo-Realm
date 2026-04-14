@@ -54,8 +54,6 @@ Purchase the game, unlock characters, and uncover a universe built on fractured 
 
 <div align="center">
 
-[Preview Video](https://streamable.com/1kq7oz)
-
 <table>
 <tr>
 <td><img src="assets/screenshot-homepage.png" alt="Homepage hero with particle system"/></td>
