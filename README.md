@@ -35,17 +35,18 @@ Purchase the game, unlock characters, and uncover a universe built on fractured 
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
 [![XAMPP](https://img.shields.io/badge/XAMPP-Compatible-FB7A24?style=for-the-badge&logo=xampp&logoColor=white)](https://apachefriends.org)
 
+
 <br>
 
-<a href="#installation"><kbd> &nbsp; Installation &nbsp; </kbd></a>&ensp;
-<a href="#universe"><kbd> &nbsp; Universe &nbsp; </kbd></a>&ensp;
-<a href="#storyline"><kbd> &nbsp; Storyline &nbsp; </kbd></a>&ensp;
-<a href="#lore-tomes"><kbd> &nbsp; Lore &nbsp; </kbd></a>&ensp;
-<a href="#erd"><kbd> &nbsp; ERD &nbsp; </kbd></a>&ensp;
-<a href="#use-case"><kbd> &nbsp; Use Case &nbsp; </kbd></a>&ensp;
-<a href="#technologies"><kbd> &nbsp; Stack &nbsp; </kbd></a>
+<a href="#installation"><kbd> <br> Installation <br> </kbd></a>&ensp;&ensp;
+<a href="#themes"><kbd> <br> Universe <br> </kbd></a>&ensp;&ensp;
+<a href="#storyline"><kbd> <br> Storyline <br> </kbd></a>&ensp;&ensp;
+<a href="#lore-tomes"><kbd> <br> Lore Tomes <br> </kbd></a>&ensp;&ensp;
+<a href="#erd"><kbd> <br> ERD <br> </kbd></a>&ensp;&ensp;
+<a href="#use-case"><kbd> <br> Use Case <br> </kbd></a>&ensp;&ensp;
+<a href="#stack"><kbd> <br> Stack <br> </kbd></a>&ensp;&ensp;
 
-</div>
+</div><br><br>
 
 ---
 
@@ -110,7 +111,7 @@ The platform brings this universe to life through:
 
 ### Arc I — The Ember Descends
 
-`Ongoing` &nbsp;·&nbsp; Chapter I
+`Ongoing` <br>·<br> Chapter I
 
 The story begins with Seraphon's fall from grace and her first steps into the mortal world. An unlikely alliance, a prophecy that should not exist, and a crack in the sky that everyone is pretending not to notice.
 
@@ -126,7 +127,7 @@ The story begins with Seraphon's fall from grace and her first steps into the mo
 
 <br>
 
-[Read Chapter I &rarr;](https://your-site.com/story/arc-1-the-ember-descends) &ensp; [Read Chapter II &rarr;](https://your-site.com/story/arc-1-the-architects-confession)
+[Read Chapter I &rarr;](https://your-site.com/story/arc-1-the-ember-descends) &ensp;&ensp; [Read Chapter II &rarr;](https://your-site.com/story/arc-1-the-architects-confession)
 
 ---
 
@@ -145,7 +146,7 @@ The archive classifies all knowledge by access level. Some truths cost more than
 
 ### Featured — The Seven Pillars: A Summary
 
-`Public Record` &nbsp;·&nbsp; Cosmology &nbsp;·&nbsp; 7 min read
+`Public Record` <br>·<br> Cosmology <br>·<br> 7 min read
 
 The Echo-Realm is held together by seven **Resonance Pillars** — massive dimensional anchors formed in the immediate aftermath of the First Shattering.
 
@@ -324,19 +325,19 @@ SETTINGS
 
 ```
                   ┌──────────────────────────────────────────────────────┐
-                  │                  Echo-Realm Platform                  │
+                  │                  Echo-Realm Platform                 │
                   │  ┌──────────────────────┐  ┌────────────────────────┐│
-                  │  │    Public access      │  │     Admin panel        ││
-  [Visitor] ──────┼─►│  Explore universe     │  │  Manage characters     ││◄── [Administrator]
-                  │  │  Browse shop          │  │  Manage elements       ││
-                  │  │  Register / Login     │  │  Manage story arcs     ││
+                  │  │    Public access     │  │     Admin panel        ││
+  [Visitor] ──────┼─►│  Explore universe    │  │  Manage characters     ││◄── [Administrator]
+                  │  │  Browse shop         │  │  Manage elements       ││
+                  │  │  Register / Login    │  │  Manage story arcs     ││
                   │  └──────────────────────┘  │  Manage lore tomes     ││
                   │  ┌──────────────────────┐  │  Manage timeline       ││
-                  │  │   Login required      │  │  Manage shop items     ││
-  [Registered] ───┼─►│  Manage cart          │  │  Process orders        ││
-     [User]       │  │  Checkout & pay       │  │  Manage users          ││
-  (extends        │  │  View order history   │  │  Configure site        ││
-   Visitor)       │  │  Manage profile       │  │  Hero CMS              ││
+                  │  │   Login required     │  │  Manage shop items     ││
+  [Registered] ───┼─►│  Manage cart         │  │  Process orders        ││
+     [User]       │  │  Checkout & pay      │  │  Manage users          ││
+  (extends        │  │  View order history  │  │  Configure site        ││
+   Visitor)       │  │  Manage profile      │  │  Hero CMS              ││
                   │  └──────────────────────┘  └────────────────────────┘│
                   └──────────────────────────────────────────────────────┘
 ```
@@ -381,6 +382,6 @@ This project draws creative and structural inspiration from:
 
 <div align="right">
 
-<sub>Echo-Realm &nbsp;·&nbsp; Laravel 10 &nbsp;·&nbsp; PHP 8.5 &nbsp;·&nbsp; MySQL</sub>
+<sub>Echo-Realm <br>·<br> Laravel 10 <br>·<br> PHP 8.5 <br>·<br> MySQL</sub>
 
 </div>
