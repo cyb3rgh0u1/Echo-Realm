@@ -54,7 +54,7 @@ Purchase the game, unlock characters, and uncover a universe built on fractured 
 
 <div align="center">
 
-https://user-images.githubusercontent.com/000000000/echo-realm-demo.mp4
+[Preview Video](https://streamable.com/1kq7oz)
 
 <table>
 <tr>
