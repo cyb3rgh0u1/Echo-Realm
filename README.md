@@ -194,22 +194,6 @@ php artisan storage:link
 php artisan optimize:clear
 ```
 
-> **Automated installer**
-> ```shell
-> bash install.sh        # Linux / Mac
-> install.bat            # Windows
-> ```
-
-> [!IMPORTANT]
-> Point your Apache virtual host `DocumentRoot` to the `/public` directory.
-> Set `AllowOverride All` in your Apache config for `.htaccess` rewrite rules to work.
-
-> [!TIP]
-> On **PHP 8.5** (XAMPP/LAMPP), run this after `composer install` to silence the platform version check:
-> ```shell
-> echo '<?php // disabled for PHP 8.5' > vendor/composer/platform_check.php
-> ```
-
 ### Default Credentials
 
 | Role | Email | Password |
