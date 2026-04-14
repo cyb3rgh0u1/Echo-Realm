@@ -1,0 +1,216 @@
+@extends('layouts.client')
+@section('title','Shop')
+
+@push('styles')
+<style>
+    .shop-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+        gap: 2rem; 
+    }
+    
+    /* Filter Buttons */
+    .type-btn { 
+        font-family: var(--font-heading); 
+        font-size: 0.65rem; 
+        letter-spacing: 0.15em; 
+        text-transform: uppercase; 
+        padding: 0.65rem 1.25rem; 
+        border-radius: 4px; 
+        text-decoration: none; 
+        transition: all 0.3s; 
+        border: 1px solid var(--border); 
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .type-btn:hover, .type-btn.active { 
+        background: rgba(255,255,255,0.05); 
+        border-color: var(--accent); 
+        color: #fff; 
+    }
+    .type-btn svg { width: 13px; height: 13px; }
+
+    /* Card Architecture */
+    .shop-card { 
+        background: rgba(255,255,255,0.02); 
+        border: 1px solid var(--border);
+        transition: transform 0.3s ease, border-color 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        height: 100%; /* Ensures all cards in a row match height */
+    }
+    .shop-card:hover { 
+        transform: translateY(-5px); 
+        border-color: var(--border-bright); 
+    }
+    
+    .shop-img { 
+        aspect-ratio: 16/9; 
+        background: var(--void); 
+        overflow: hidden; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        position: relative;
+        flex-shrink: 0;
+    }
+    .shop-img svg.placeholder-icon { width: 48px; height: 48px; opacity: 0.05; stroke-width: 1; }
+
+    /* Badge & Tag Styling */
+    .shop-discount { 
+        position: absolute; top: 12px; left: 12px; background: var(--red); 
+        color: #fff; font-size: 0.65rem; font-weight: 700; padding: 2px 6px; border-radius: 2px; 
+    }
+    .shop-featured-tag { 
+        position: absolute; top: 12px; right: 12px; background: var(--accent); 
+        color: var(--void); font-size: 0.6rem; font-weight: 800; text-transform: uppercase; 
+        padding: 2px 8px; border-radius: 2px; letter-spacing: 0.05em;
+    }
+
+    /* Card Content Alignment */
+    .shop-body { 
+        padding: 1.5rem; 
+        display: flex; 
+        flex-direction: column; 
+        flex-grow: 1; /* Fills the vertical space */
+    }
+
+    .shop-desc { 
+        margin-top: 0.6rem; 
+        font-size: 0.85rem; 
+        color: var(--text-muted); 
+        line-height: 1.6;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .include-item { display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.75rem; margin-bottom: 0.4rem; }
+    .include-icon { width: 10px; height: 10px; color: var(--accent); flex-shrink: 0; }
+
+    /* Footer Alignment (Bottom pinning) */
+    .shop-footer { 
+        margin-top: auto; /* Pushes price and buttons to the bottom */
+        padding-top: 1.5rem;
+    }
+    .shop-pricing { margin-bottom: 1rem; display: flex; align-items: baseline; gap: 10px; }
+    .price-current { font-family: var(--font-heading); font-size: 1.25rem; color: #fff; }
+    .price-old { font-size: 0.85rem; color: var(--text-dim); text-decoration: line-through; }
+</style>
+@endpush
+
+@section('content')
+
+@php
+    $icons = [
+        'all'       => '<rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>',
+        'game'      => '<rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4m-2-2v4m7-2h.01m2.99 0h.01"></path>',
+        'character' => '<path d="M12 2l3 9 9 3-9 3-3 9-3-9-9-3 9-3 3-9z"></path>',
+        'skin'      => '<path d="M12 2v20m10-10H2"></path><circle cx="12" cy="12" r="3"></circle>',
+        'bundle'    => '<path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path>',
+        'currency'  => '<path d="M6 3h12l4 6-10 12L2 9z"></path>',
+        'cosmetic'  => '<path d="M12 21c-3.1 0-5.6-2.5-5.6-5.6 0-3.1 2.5-5.6 5.6-5.6s5.6 2.5 5.6 5.6c0 3.1-2.5 5.6-5.6 5.6z"></path><path d="M12 10V2"></path>',
+        'info'      => '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line>',
+        'bullet'    => '<polyline points="20 6 9 17 4 12"></polyline>'
+    ];
+@endphp
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div style="position:relative;z-index:1">
+    <p class="section-label">Realm Store</p>
+    <h1 class="section-title">The Echo Market</h1>
+    <p class="section-subtitle" style="margin:0 auto">Secure resources to navigate the broken resonance.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="container">
+    {{-- TYPE FILTER --}}
+    <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:3rem">
+      @php $curType = request('type'); @endphp
+      <a href="{{ route('shop.index') }}" class="type-btn {{ !$curType ? 'active' : '' }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{!! $icons['all'] !!}</svg>
+        All
+      </a>
+      @php
+        $shopTypes = ['game' => 'Game', 'character' => 'Characters', 'skin' => 'Skins', 'bundle' => 'Bundles', 'currency' => 'Currency', 'cosmetic' => 'Cosmetics'];
+      @endphp
+      @foreach($shopTypes as $val => $label)
+        <a href="{{ route('shop.index') }}?type={{ $val }}" class="type-btn {{ $curType === $val ? 'active' : '' }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{!! $icons[$val] ?? '' !!}</svg>
+          {{ $label }}
+        </a>
+      @endforeach
+    </div>
+
+    {{-- ITEMS GRID --}}
+    <div class="shop-grid">
+      @forelse($items as $i => $item)
+        <div class="card shop-card reveal" style="transition-delay:{{ ($i % 8) * 0.07 }}s">
+          <div class="shop-img">
+            @if($item->image)
+              <img src="{{ asset('storage/'.$item->image) }}" alt="{{ $item->name }}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
+            @else
+              <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">{!! $icons[$item->type] ?? $icons['game'] !!}</svg>
+            @endif
+
+            @if($item->discount_percent) <span class="shop-discount">-{{ $item->discount_percent }}%</span> @endif
+            @if($item->is_featured) <span class="shop-featured-tag">Featured</span> @endif
+          </div>
+
+          <div class="shop-body">
+            <div style="margin-bottom:0.75rem">
+                <span class="badge badge-{{ $item->rarity }}">{{ strtoupper($item->rarity) }}</span>
+            </div>
+            
+            <div class="shop-name" style="font-weight:600; font-size:1.15rem; color:#fff">{{ $item->name }}</div>
+            <p class="shop-desc">{{ $item->description }}</p>
+            
+            @if($item->includes && count($item->includes))
+            <div style="margin-top: 1.25rem;">
+              @foreach(array_slice($item->includes, 0, 2) as $inc)
+              <div class="include-item">
+                <svg class="include-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">{!! $icons['bullet'] !!}</svg>
+                {{ $inc }}
+              </div>
+              @endforeach
+            </div>
+            @endif
+
+            <div class="shop-footer">
+                <div class="shop-pricing">
+                  <span class="price-current">${{ number_format($item->price, 2) }}</span>
+                  @if($item->original_price)
+                  <span class="price-old">${{ number_format($item->original_price, 2) }}</span>
+                  @endif
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr 50px;gap:0.5rem">
+                  <form action="{{ route('cart.add') }}" method="POST" style="margin:0">
+                    @csrf
+                    <input type="hidden" name="item_id" value="{{ $item->id }}">
+                    <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center; padding: 0.8rem">Get Now</button>
+                  </form>
+                  <a href="{{ route('shop.show', $item->slug) }}" class="btn btn-outline" style="display:flex;align-items:center;justify-content:center; padding:0">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        {!! $icons['info'] !!}
+                    </svg>
+                  </a>
+                </div>
+            </div>
+          </div>
+        </div>
+      @empty
+        <div style="grid-column:1/-1;text-align:center;padding:6rem 2rem; border: 1px dashed var(--border); border-radius:8px">
+          <p style="font-family:var(--font-heading); color:var(--text-dim); opacity:0.5">Inventory Depleted</p>
+        </div>
+      @endforelse
+    </div>
+    <div style="margin-top:3rem">{{ $items->links() }}</div>
+  </div>
+</div>
+@endsection
