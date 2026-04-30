@@ -61,7 +61,7 @@ $elements = [
         'description' => 'Lightning and rain fused into living force. Stormblood wielders carry the fury of the sky in their veins.',
         'color' => '#3b82f6',
         'glow_color' => '#60a5fa',
-        'symbol' => '⟐'        // Changed from ⚡
+        'symbol' => '⟐'        
     ],
     [
         'name' => 'Verdance',
